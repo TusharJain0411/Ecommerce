@@ -1,0 +1,43 @@
+:root{
+    --bgColor: #0b1120;         
+    --containerBg: #111827;     
+    --insideBg: #1f2937;        
+
+    --lg: linear-gradient(
+        135deg,
+        #7c3aed,
+        #ec4899
+    );
+
+    --txt: #f8fafc;
+
+    --loginPH: #7c3aed;
+    --loginTxt: #c4b5fd;
+
+    --registerPH: #ec4899;
+    --registerTxt: #f9a8d4;
+}
+
+
+
+
+.container-home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+.card{
+    background-color: var(--containerBg);
+    padding: 2rem;
+    border-radius: 10px;
+    color: var(--txt);
+    width: 400px;
+    text-align: center;
+}
+
+.card h2,.card p{
+    padding:0.2rem 0 ;
+}
+
+

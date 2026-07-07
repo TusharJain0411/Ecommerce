@@ -1,0 +1,175 @@
+.addproduct {
+  width: 100%;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  background: var(--insideBg);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.addproduct-head {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--registerPH);
+  margin-bottom: .5rem;
+}
+
+
+
+.addproduct input,
+.addproduct textarea,
+.addproduct select {
+  width: 100%;
+  padding: .9rem 1rem;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  outline: none;
+  font-size: .95rem;
+  background: #fff;
+  transition: .3s;
+}
+
+.addproduct input:focus,
+.addproduct textarea:focus,
+.addproduct select:focus {
+  border-color: var(--registerPH);
+  box-shadow: 0 0 0 3px rgba(236, 72, 153, .18);
+}
+
+.addproduct textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+
+
+.addproduct input[type="file"] {
+  cursor: pointer;
+  padding: .7rem;
+}
+
+
+
+.button-action {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: .5rem;
+  flex-wrap: wrap;
+}
+
+.AddProduct,
+.button-action a {
+  min-width: 180px;
+  padding: .9rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.AddProduct {
+  cursor: pointer;
+  color: var(--txt);
+  background: linear-gradient(
+    35deg,
+    var(--registerTxt),
+    var(--registerPH),
+    var(--insideBg)
+  );
+}
+
+.AddProduct:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(236, 72, 153, .35);
+}
+
+.button-action a {
+  color: #fff;
+  background: linear-gradient(35deg, #ff7b7b, #e53935);
+}
+
+.button-action a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(229, 57, 53, .35);
+}
+
+.change-description {
+  color: #888;
+  font-size: .9rem;
+}
+
+
+@media (max-width: 768px) {
+
+  .addproduct {
+    padding: 1.5rem;
+  }
+
+  .addproduct-head {
+    font-size: 1.7rem;
+  }
+
+  .button-action {
+    flex-direction: column;
+  }
+
+  .AddProduct,
+  .button-action a {
+    width: 100%;
+  }
+
+}
+
+
+
+@media (max-width: 480px) {
+
+  .addproduct {
+    margin: 1rem auto;
+    padding: 1.2rem;
+    border-radius: 14px;
+  }
+
+  .addproduct-head {
+    font-size: 1.5rem;
+  }
+
+  .addproduct input,
+  .addproduct textarea {
+    font-size: .9rem;
+    padding: .8rem;
+  }
+  .button-action{
+    display: flex;
+    flex-direction: row;   
+    gap: 10px;
+    width: 100%;
+  }
+
+  .AddProduct,
+  .button-action a{
+    flex: 1;               
+    width: auto;
+    padding: 0.75rem;
+    font-size: 0.85rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    white-space: nowrap;  
+  } 
+
+
+}

@@ -1,0 +1,12 @@
+.admin-login-container{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:
+        radial-gradient(circle at top left, rgba(124,58,237,.18), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(236,72,153,.18), transparent 40%),
+        var(--bgColor);
+}

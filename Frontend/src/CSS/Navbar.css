@@ -1,0 +1,203 @@
+:root{
+    --bgColor: #0b1120;         
+    --containerBg: #111827;     
+    --insideBg: #1f2937;        
+
+    --lg: linear-gradient(
+        135deg,
+        #7c3aed,
+        #ec4899
+    );
+
+    --txt: #f8fafc;
+
+    --loginPH: #7c3aed;
+    --loginTxt: #c4b5fd;
+
+    --registerPH: #ec4899;
+    --registerTxt: #f9a8d4;
+}
+
+
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:var(--containerBg);
+    padding: 0.25rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo{
+    color: transparent;
+    background: var(--lg);
+    background-clip: text;
+   font-size: 22px;
+   text-decoration: none;
+   border: none;
+}
+.navbar .logout{
+    background: var(--lg);
+border: none;
+    color:black;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding:0.2rem 1rem;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.navbar .logout:hover{
+   box-shadow: 0 2px 10px .2px #5f5c85;
+      scale: 1.05;
+      color: var(--txt);
+}
+
+.userIcon {
+  width: 35px;
+  height: 35px;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.userIcon img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  
+}
+.userIcon img:hover{
+    box-shadow: 0 0 8px var(--loginTxt);
+    scale: 1.05;
+}
+
+
+.userSection{
+    position: fixed;
+    border: 1px solid black;
+    top: 10%;
+    right: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    background-color: var(--insideBg);
+    box-shadow: 0 0 10px 1px var(--containerBg);
+    color: var(--txt);
+    z-index: 1000;
+    
+}
+.userSection img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 0.5rem;
+    border: 2px solid var(--loginTxt);
+    flex-shrink: 0;
+}
+.userSection span{
+    font-size: 18px;
+    margin-bottom: 0.20rem;
+}
+.userSection p{
+    font-size: 14px;
+    color: var(--loginTxt);
+   margin-bottom: 1.2rem;
+}
+
+.buttonCls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.userIcon,
+.Cart {
+
+  border: none;
+  cursor: pointer;
+
+}
+
+.Cart{
+    background-color: transparent;
+    position: relative;
+}
+
+.Cart i{
+font-size: 26px;
+color: var(--bgColor);
+    color: transparent;
+    background: var(--lg);
+    background-clip: text;
+}
+.Cart span{
+    position: absolute;
+    top: -2px;
+    right: -2px;
+
+    width: 18px;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--registerPH);
+    color: var(--txt);
+
+    font-size: 12px;
+    border-radius: 50%;
+    font-weight: 600;
+}
+
+.Cart {
+  width: 45px;
+  height: 45px;
+  font-size: 24px;
+  color: #333;
+  transition: transform 0.2s ease;
+}
+
+
+.wishlistBtn{
+   
+    padding:0.1rem 0.45rem;
+    border-radius: 12px;
+
+background-color: var(--containerBg);
+
+    border: none;
+font-size: 16px;
+
+
+  color: var(--txt);  
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.7rem;
+  
+      padding:0 3rem;
+}
+
+
+.wishlistBtn:hover{
+    scale: 1.1;
+    padding:0 3rem;
+      box-shadow: 0 0 10px 1px rgb(71, 69, 69);
+}

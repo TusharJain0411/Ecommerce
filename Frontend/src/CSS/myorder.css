@@ -1,0 +1,135 @@
+.orders-page {
+  width: 95%;
+  max-width: 1400px;
+  margin: 5rem auto;
+  padding: 20px;
+}
+
+.orders-page h2 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: #222;
+  font-weight: 700;
+}
+
+
+.orders-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+
+.order-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+
+.order-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+
+.order-infos {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order-infos h3 {
+  font-size: 18px;
+  color: #222;
+  margin: 0;
+  height: 48px;
+  overflow: hidden;
+}
+
+.order-infos p {
+  margin: 0;
+  color: #666;
+  font-size: 15px;
+}
+
+
+.status {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.paid {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.status.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status.failed {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+
+.order-actions {
+  margin-top: 15px;
+}
+
+.order-actions button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.order-actions button:hover {
+  background: #1d4ed8;
+}
+
+
+@media (max-width: 992px) {
+  .orders-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 600px) {
+  .orders-container {
+    grid-template-columns: 1fr;
+  }
+
+  .order-card img {
+    height: 200px;
+  }
+
+  .orders-page h2 {
+    text-align: center;
+    font-size: 1.8rem;
+  }
+}
