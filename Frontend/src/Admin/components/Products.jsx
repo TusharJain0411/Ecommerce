@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AdminProductItem from "./AdminProductItem";
 import "../CSS/adminProduct.css";
+import ProductSkeleton from "./ProductSkeleton";
 
 function Products() {
   const navigate = useNavigate();
@@ -31,13 +32,26 @@ function Products() {
     setLoading(false);
   };
 
-  if (loading) {
-    return (
-      <div className="loading-products">
-        <h3>Loading Products...</h3>
-      </div>
-    );
-  }
+ if (loading) {
+   return (
+     <div className="products-page">
+       <div className="products-header">
+         <div>
+           <div className="skeleton skeleton-heading"></div>
+           <div className="skeleton skeleton-subheading"></div>
+         </div>
+
+         <div className="skeleton skeleton-add-btn"></div>
+       </div>
+
+       <div className="products-grid">
+         {[...Array(8)].map((_, index) => (
+           <ProductSkeleton key={index} />
+         ))}
+       </div>
+     </div>
+   );
+ }
 
   return (
     <div className="products-page">

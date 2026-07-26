@@ -31,9 +31,28 @@ function MyOrders() {
     fetchOrders();
   }, []);
 
-  if (loading) {
-    return <h3 style={{ color: "#fff", textAlign: "center" }}>Loading...</h3>;
-  }
+ if (loading) {
+   return (
+     <div className="orders-page">
+       <div className="skeleton-order sk-page-title"></div>
+
+       <div className="orders-container">
+         {[...Array(6)].map((_, index) => (
+           <div className="order-card" key={index}>
+             <div className="skeleton-order sk-order-img"></div>
+
+             <div className="order-infos">
+               <div className="skeleton-order sk-order-title"></div>
+               <div className="skeleton-order sk-order-price"></div>
+               <div className="skeleton-order sk-order-status"></div>
+               <div className="skeleton-order sk-order-qty"></div>
+             </div>
+           </div>
+         ))}
+       </div>
+     </div>
+   );
+ }
 
   return (
     <div className="orders-page">

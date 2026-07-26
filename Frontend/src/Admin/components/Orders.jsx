@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../CSS/orders.css";
 import { getAllOrders } from "../../services/adminOrderDetailAPI";
-
+import OrderSkeleton from "./OrderSkeleton";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
@@ -25,9 +25,19 @@ const fetchOrders = async () => {
     fetchOrders();
   }, []);
 
-  if (loading) {
-    return <h2 className="loading">Loading...</h2>;
-  }
+ if (loading) {
+   return (
+     <div className="admin-orders">
+       <div className="skeleton-order sk-heading"></div>
+
+       <div className="orders-grid">
+         {[...Array(4)].map((_, index) => (
+           <OrderSkeleton key={index} />
+         ))}
+       </div>
+     </div>
+   );
+ }
 
   return (
     <div className="admin-orders">

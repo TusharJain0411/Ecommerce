@@ -33,7 +33,49 @@ function AdminProtectedRoute({children}) {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="d-flex justify-content-center align-items-center position-absolute top-50" style={{left:"45%"}}>
+        <button
+          class="btn bg-transparent p-1 m-0"
+          type="button"
+          disabled
+          style={{ color: "#7c3aed" }}
+        >
+          <span
+            class="spinner-grow spinner-grow-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+         
+        </button>
+        <button
+          class="btn bg-transparent p-1 m-0"
+          type="button"
+          disabled
+          style={{ color: "#7c3aed" }}
+        >
+          <span
+            class="spinner-grow spinner-grow-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+         
+        </button>
+        <button
+          class="btn bg-transparent p-1 m-0"
+          type="button"
+          disabled
+          style={{ color: "#7c3aed" }}
+        >
+          <span
+            class="spinner-grow spinner-grow-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          
+        </button>
+      </div>
+    );
   }
 
   if (!isValid) {

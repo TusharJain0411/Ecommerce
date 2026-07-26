@@ -42,7 +42,7 @@ export const removeCartItem = (productId, token) =>
   });
 
 export const clearCartAPI = (token) =>
-  API.delete("/cart/clear", {
+  API.delete("/project1/cart/clear", {
     headers: {
       Authorization: `Bearer ${token}`,
     },

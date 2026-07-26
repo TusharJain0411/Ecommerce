@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProductsItem from "../components/ProductItem";
+import ProductSkeleton from "../components/ProductSkeleton";
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
@@ -27,7 +28,20 @@ function ProductPage() {
   };
 
   if (loading) {
-    return <h3>Loading...</h3>;
+    return (
+      <div className="container-product">
+        <div className="row g-2">
+          {[...Array(8)].map((_, index) => (
+            <div
+              className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
+              key={index}
+            >
+              <ProductSkeleton />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
 
   return (

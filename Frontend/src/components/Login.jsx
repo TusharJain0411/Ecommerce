@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useDispatch,useSelector } from "react-redux";
 import { loginSuccess, setError,clearMessages } from "../redux/slices/userSlice";
 
+
 function Login() {
 
   const dispatch = useDispatch();
@@ -14,8 +15,8 @@ const navigate=useNavigate();
   const inputs = useRef([]);
   const submitBtn = useRef();
   const [isSubmit,setIsSubmit]=useState(false);
-  const [see,setSee]=useState(false)
-  ;
+  const [see,setSee]=useState(false);
+  const [loading,setloading]=useState(false);
 const [LoginData,setLoginData]=useState({
   email:"",
   password:""
@@ -60,6 +61,7 @@ const handleKeyDown = (e, index) => {
      }
 
      try {
+        setloading(true);
        const res = await LoginUser(LoginData);
        localStorage.setItem("token", res.data.token);
        dispatch(loginSuccess(res.data));
@@ -69,6 +71,9 @@ const handleKeyDown = (e, index) => {
        const message = error.response?.data?.message || "Login failed";
 
        dispatch(setError(message));
+     }
+     finally{
+      setloading(false);
      }
    };
 
@@ -135,10 +140,25 @@ setLoginData({...LoginData,[e.target.name]:e.target.value});
             )}
           </button>
         </div>
-        <button className="sbt-btn" ref={submitBtn} onClick={handlesubmitLogin}>
-          {" "}
-          Sign in
-        </button>
+
+        {loading ? (
+          <button className="sbt-btn" disabled>
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Logging in...
+          </button>
+        ) : (
+          <button
+            className="sbt-btn"
+            ref={submitBtn}
+            onClick={handlesubmitLogin}
+          >
+            Sign in
+          </button>
+        )}
       </form>
     </>
   );

@@ -10,6 +10,8 @@ import profile_img from "../assets/accountImg.png";
 function Profile() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [logoutLoading,setLogoutLoading]=useState(false);
+  const[saveLoading,setSaveLoading]=useState(false);
   const [showPopUp,setShowPopUp]=useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -47,6 +49,7 @@ function Profile() {
 
   const handleLogout = async () => {
     try {
+     setLogoutLoading(true);
       await logoutUser(token);
 
       dispatch(logout());
@@ -57,7 +60,12 @@ function Profile() {
     } catch (err) {
       toast.error("Logout failed");
     }
+    finally{
+    setLogoutLoading(false);
+    }
   };
+
+  
 
 const handleBack=()=>{
   navigate("/home")
@@ -65,6 +73,7 @@ const handleBack=()=>{
 
 const handleUpdate = async () => {
   try {
+    setSaveLoading(true);
     const formData = new FormData();
 
     formData.append("name", editData.name);
@@ -94,6 +103,9 @@ const handleUpdate = async () => {
   } catch (err) {
     toast.error("Update Failed");
   }
+  finally{
+    setSaveLoading(false);
+  }
 };
 
 const handleEdit = () => {
@@ -110,9 +122,51 @@ const handleEdit = () => {
   setShowPopUp(true);
 };
 
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
+if (loading) {
+  return (
+    <div
+      className="d-flex justify-content-center align-items-center position-absolute top-50"
+      style={{ left: "45%" }}
+    >
+      <button
+        class="btn bg-transparent p-1 m-0"
+        type="button"
+        disabled
+        style={{ color: "#7c3aed" }}
+      >
+        <span
+          class="spinner-grow spinner-grow-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+      </button>
+      <button
+        class="btn bg-transparent p-1 m-0"
+        type="button"
+        disabled
+        style={{ color: "#7c3aed" }}
+      >
+        <span
+          class="spinner-grow spinner-grow-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+      </button>
+      <button
+        class="btn bg-transparent p-1 m-0"
+        type="button"
+        disabled
+        style={{ color: "#7c3aed" }}
+      >
+        <span
+          class="spinner-grow spinner-grow-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+      </button>
+    </div>
+  );
+}
 
   return (
     <>
@@ -194,9 +248,20 @@ const handleEdit = () => {
               </div>
             </div>
             <div className="save-cancel-btn">
-              <button className="save-btn" onClick={handleUpdate}>
-                Save
-              </button>
+              {saveLoading ? (
+                <button className="save-btn" disabled>
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Saving...
+                </button>
+              ) : (
+                <button className="save-btn" onClick={handleUpdate}>
+                  Save
+                </button>
+              )}
 
               <button
                 className="cancel-btn"
@@ -213,11 +278,7 @@ const handleEdit = () => {
         <div className="profile-card">
           <div className="profile-image">
             <img
-              src={
-                user.profileImage
-                  ? user.profileImage
-                  :profile_img
-              }
+              src={user.profileImage ? user.profileImage : profile_img}
               alt="Profile"
             />
           </div>
@@ -240,7 +301,19 @@ const handleEdit = () => {
               <strong>Location:</strong> {user.location}
             </p>
             <div className="userProfile-btn">
-              <button onClick={handleLogout}>Logout</button>
+              {logoutLoading ? (
+                <button disabled>
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Logging out...
+                </button>
+              ) : (
+                <button onClick={handleLogout}>Logout</button>
+              )}
+
               <button onClick={handleBack}>Back</button>
             </div>
           </div>

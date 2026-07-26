@@ -112,6 +112,64 @@
 }
 
 
+.skeleton-order{
+    background: linear-gradient(
+        90deg,
+        #2f2f2f 25%,
+        #444 50%,
+        #2f2f2f 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+    border-radius: 8px;
+}
+
+@keyframes shimmer{
+    0%{
+        background-position: 200% 0;
+    }
+    100%{
+        background-position: -200% 0;
+    }
+}
+
+.sk-page-title{
+    width:180px;
+    height:34px;
+    margin-bottom:30px;
+}
+
+.sk-order-img{
+    width:120px;      /* Match your image size */
+    height:120px;
+    border-radius:12px;
+    flex-shrink:0;
+}
+
+.sk-order-title{
+    width:75%;
+    height:22px;
+    margin-bottom:14px;
+}
+
+.sk-order-price{
+    width:80px;
+    height:18px;
+    margin-bottom:12px;
+}
+
+.sk-order-status{
+    width:140px;
+    height:18px;
+    margin-bottom:12px;
+}
+
+.sk-order-qty{
+    width:90px;
+    height:18px;
+}
+
+
 @media (max-width: 992px) {
   .orders-container {
     grid-template-columns: repeat(2, 1fr);

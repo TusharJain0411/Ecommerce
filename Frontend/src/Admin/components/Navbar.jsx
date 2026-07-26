@@ -8,11 +8,14 @@ import { FiMoreVertical } from "react-icons/fi";
 function Navbar() {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
+  const [loading,setLoading]=useState(false);
   const handleLogout = async () => {
     try {
+      setLoading(true);
       const token = localStorage.getItem("token");
 
       if (token) {
+        
         await logoutAmin(token);
       }
 
@@ -20,6 +23,9 @@ function Navbar() {
       navigate("/adminlogin", { replace: true });
     } catch (error) {
       console.log(error);
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -83,7 +89,18 @@ function Navbar() {
           </NavLink>
         </div>
 
-        <button onClick={handleLogout}>Logout</button>
+        {loading ? (
+          <button className="d-flex gap-1 justify-content-center align-items-center" disabled>
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Logging out...
+          </button>
+        ) : (
+          <button onClick={handleLogout}>Logout</button>
+        )}
       </div>
 
       {/* Mobile Dropdown */}
@@ -98,7 +115,18 @@ function Navbar() {
 
         <NavLink to="/admin/orders">Orders</NavLink>
 
-        <button onClick={handleLogout}>Logout</button>
+        {loading ? (
+          <button disabled>
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Logging out...
+          </button>
+        ) : (
+          <button onClick={handleLogout}>Logout</button>
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addWishlist, removeWishlist } from "../services/wishlistAPI";
 import { setWishlist } from "../redux/slices/wishlistSlice";
@@ -17,6 +17,8 @@ function ProductsItem({ product }) {
   const isWishlisted = items.some(
     (item) => item.productId?._id === product._id,
   );
+  const [wishlistLoading,setWishlistLoading]=useState(false);
+  const [cartLoading,setCartLoading]=useState(false);
 
   const handleCardClick = () => {
     navigate(`/product/${product._id}`);
@@ -27,7 +29,7 @@ function ProductsItem({ product }) {
     e.stopPropagation();
 
     try {
-     
+      setCartLoading(true);
 
       const token = localStorage.getItem("token");
 
@@ -39,6 +41,9 @@ function ProductsItem({ product }) {
     } catch (err) {
       toast.error(err.response?.data?.message || "Error");
     }
+    finally{
+      setCartLoading(false);
+    }
   };
 
 
@@ -46,6 +51,7 @@ function ProductsItem({ product }) {
     e.stopPropagation();
 
     try {
+      setWishlistLoading(true);
       const res = await addWishlist(product._id);
 
       dispatch(setWishlist(res.data.wishlist));
@@ -53,24 +59,35 @@ function ProductsItem({ product }) {
     } catch (err) {
       console.log(err);
     }
+    finally{
+      setWishlistLoading(false);
+    }
   };
 
   const handleRemoveFromWishlist = async (e) => {
     e.stopPropagation();
 
     try {
+      setWishlistLoading(true);
       const res = await removeWishlist(product._id);
 
       dispatch(setWishlist(res.data.wishlist));
     } catch (err) {
       console.log(err);
     }
+    finally{
+      setWishlistLoading(false);
+    }
   };
 
   return (
     <div
       className={`product-card ${product.stock <= 0 ? "out-of-stock ofs-label" : ""}`}
-      onClick={()=>{if(product.stock>0){handleCardClick()}}}
+      onClick={() => {
+        if (product.stock > 0) {
+          handleCardClick();
+        }
+      }}
     >
       <div className="image">
         <img src={product.img} alt={product.title} />
@@ -81,13 +98,19 @@ function ProductsItem({ product }) {
         <p>{product.category}</p>
         <p>₹{product.price}</p>
 
-        <button
-          className="cartBtm"
-          onClick={handleAddToCart}
-          disabled={product.stock <= 0}
-        >
-          Add to Cart
-        </button>
+        {cartLoading ? (
+          <button className="cartBtm" disabled>
+           adding to cart...
+          </button>
+        ) : (
+          <button
+            className="cartBtm"
+            onClick={handleAddToCart}
+            disabled={product.stock <= 0}
+          >
+            Add to Cart
+          </button>
+        )}
 
         <button
           className={isWishlisted ? "wish-active" : "wish"}
@@ -96,7 +119,13 @@ function ProductsItem({ product }) {
           }
         >
           {isWishlisted ? (
-            <i className="fa-solid fa-heart"></i>
+            wishlistLoading ? (
+              <i className="fa-solid fa-heart fa-beat"></i>
+            ) : (
+              <i className="fa-solid fa-heart"></i>
+            )
+          ) : wishlistLoading ? (
+            <i className="fa-solid fa-heart-circle-plus fa-beat"></i>
           ) : (
             <i className="fa-solid fa-heart-circle-plus"></i>
           )}
@@ -111,7 +140,9 @@ function ProductsItem({ product }) {
           }}
         >
           {product.stock <= 9 && product.stock > 5 ? "Only few left" : ""}
-          {product.stock <= 5 && product.stock>0 ? `Hurry Up! ${product.stock} left` : ""}
+          {product.stock <= 5 && product.stock > 0
+            ? `Hurry Up! ${product.stock} left`
+            : ""}
         </p>
       </div>
     </div>

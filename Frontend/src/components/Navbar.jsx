@@ -16,6 +16,7 @@ const [user,setUser]=useState({});
 const [isOpen,setIsOpen]=useState(false);
 const dispatch = useDispatch();
 const items = useSelector((state) => state.cart.items);
+const [loading,setLoading]=useState(false);
 
 const handleWishlist=()=>{
   setIsOpen(false)
@@ -26,6 +27,7 @@ const handleWishlist=()=>{
 
 const handleLogout = async () => {
   try {
+    setLoading(true);
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -37,6 +39,9 @@ const handleLogout = async () => {
     navigate("/", { replace: true });
   } catch (err) {
     console.log(err);
+  }
+  finally{
+    setLoading(false);
   }
 };
 
@@ -99,7 +104,7 @@ useEffect(() => {
           </button>
 
           <button className="userIcon" onClick={handleAccount}>
-            <img src={user?.profileImage ||profile_img} alt={user?.name} />
+            <img src={user?.profileImage || profile_img} alt={user?.name} />
           </button>
         </div>
 
@@ -117,10 +122,22 @@ useEffect(() => {
             <button className="wishlistBtn" onClick={handleOrder}>
               Orders
             </button>
-
-            <button className="logout" onClick={handleLogout}>
-              Logout
-            </button>
+            
+            {loading ? (
+              <button className="logout" disabled>
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Logging out...
+              </button>
+            ) : (
+              <button className="logout" onClick={handleLogout}>
+                Logout
+              </button>
+            )}
+            
           </div>
         ) : (
           ""

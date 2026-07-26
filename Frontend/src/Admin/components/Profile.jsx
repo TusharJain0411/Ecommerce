@@ -21,12 +21,13 @@ function Profile() {
 
   const [preview, setPreview] = useState(null);
 
-
+ const [loading, setLoading] = useState(true);
 
 
 
   const loadProfile = async () => {
     try {
+        setLoading(true);
       const res = await getProfile(token);
 
       const admin = res.data.admin;
@@ -45,6 +46,9 @@ function Profile() {
       setPreview(admin.profileImage);
     } catch (err) {
       console.log(err);
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -97,6 +101,33 @@ function Profile() {
       toast.error("Update Failed");
     }
   };
+
+const ProfileSkeleton = () => {
+  return (
+    <>
+      <div className="Profile-head">
+        <div>
+          <div className="skeleton skeleton-heading"></div>
+        </div>
+        <div className="skeleton skeleton-add-btn"></div>
+      </div>
+      <div className="Adminprofile-container">
+        <div className="img-container skeleton skeleton-circle"></div>
+
+        <div className="profile-form">
+          <div className="skeleton skeleton-text"></div>
+          <div className="skeleton skeleton-input"></div>
+          <div className="skeleton skeleton-input"></div>
+          <div className="skeleton skeleton-input"></div>
+          <div className="skeleton skeleton-input"></div>
+        </div>
+      </div>
+    </>
+  );
+};
+ if (loading) {
+   return <ProfileSkeleton />;
+ }
 
   return (
     <>

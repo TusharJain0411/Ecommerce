@@ -44,11 +44,11 @@
 .navbar .logout{
     background: var(--lg);
 border: none;
-    color:black;
+    color:rgb(234, 232, 232);
     font-size: 16px;
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: center;
     padding:0.2rem 1rem;
     cursor: pointer;
     border-radius: 15px;
@@ -58,6 +58,17 @@ border: none;
    box-shadow: 0 2px 10px .2px #5f5c85;
       scale: 1.05;
       color: var(--txt);
+}
+.logout:disabled{
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7;
+}
+.logout:disabled:hover{
+       box-shadow:none;
+      
 }
 
 .userIcon {

@@ -159,6 +159,113 @@
 }
 
 
+/* Skeleton */
+
+.skeleton-order{
+    background:linear-gradient(
+        90deg,
+        #ececec 25%,
+        #f7f7f7 50%,
+        #ececec 75%
+    ) !important;
+    background-size:200% 100%;
+    animation:shimmer 1.4s linear infinite;
+    border-radius:8px;
+}
+
+@keyframes shimmer{
+    0%{
+        background-position:200% 0;
+    }
+    100%{
+        background-position:-200% 0;
+    }
+}
+
+/* Heading */
+
+.sk-heading{
+    width:230px;
+    height:36px;
+    margin-bottom:25px;
+}
+
+/* Top */
+
+.sk-name{
+    width:160px;
+    height:24px;
+    margin-bottom:10px;
+}
+
+.sk-status{
+    width:90px;
+    height:28px;
+}
+
+.sk-date{
+    width:90px;
+    height:18px;
+}
+
+/* User */
+
+.sk-label{
+    width:60px;
+    height:12px;
+    margin-bottom:8px;
+}
+
+.sk-text{
+    width:140px;
+    height:18px;
+}
+
+.sk-long{
+    width:100%;
+    height:18px;
+}
+
+/* Products */
+
+.sk-image{
+    width:80px;
+    height:80px;
+    border-radius:10px;
+}
+
+.sk-product{
+    width:180px;
+    height:20px;
+    margin-bottom:10px;
+}
+
+.sk-price{
+    width:70px;
+    height:16px;
+    margin-bottom:8px;
+}
+
+.sk-qty{
+    width:90px;
+    height:16px;
+}
+
+/* Summary */
+
+.sk-summary-title{
+    width:90px;
+    height:14px;
+    margin:0 auto 10px;
+}
+
+.sk-summary-value{
+    width:60px;
+    height:24px;
+    margin:0 auto;
+}
+
+
 
 @media(max-width:768px){
 

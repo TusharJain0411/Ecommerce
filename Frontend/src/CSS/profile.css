@@ -99,7 +99,19 @@
 .userProfile-btn button:first-child{
     background:var(--lg);
 }
+.userProfile-btn button:first-child:disabled{
+   
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7;
 
+
+}
+.userProfile-btn button:first-child:disabled:hover{
+    transform: none;  
+}
 .userProfile-btn button:last-child{
     background:#ef4444;
 }
@@ -230,6 +242,13 @@
     color: white;
 }
 
+.save-btn:disabled{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    
+}
 .cancel-btn {
     background: #ef4444;
     color: white;

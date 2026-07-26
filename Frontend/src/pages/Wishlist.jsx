@@ -1,4 +1,4 @@
-import React ,{useEffect} from 'react'
+import React ,{useEffect, useState} from 'react'
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,9 +12,20 @@ function Wishlist() {
   const dispatch = useDispatch();
   const validItems = items.filter((item) => item.productId);
 
+
+
 const handleRemoveFromWishlist = async (id) => {
-  const res = await removeWishlist(id);
-  dispatch(setWishlist(res.data.wishlist));
+  try{
+
+    const res = await removeWishlist(id);
+    dispatch(setWishlist(res.data.wishlist));
+  }
+  catch(err){
+    console.log("wishlist is not removing",err);
+  }
+  finally{
+  
+  }
 };
 
   useEffect(() => {
@@ -76,7 +87,10 @@ const handleRemoveFromWishlist = async (id) => {
                         handleRemoveFromWishlist(item.productId._id)
                       }
                     >
-                      <i class="fa-solid fa-heart-circle-xmark"></i>
+                      
+                    
+                        <i class="fa-solid fa-heart-circle-xmark"></i>
+                     
                     </button>
                   </div>
                 </div>

@@ -8,6 +8,7 @@ import {
   updateAdmin,
 } from "../../services/adminAuth";
 import { useSelector } from "react-redux";
+import AdminSkeleton from "./AdminSkeleton";
 
 function AdminList() {
   const isMainAdmin = useSelector((state) => state.admin.MainAdmin);
@@ -16,6 +17,7 @@ function AdminList() {
   const [isDelete, setIsDelete] = useState(false);
   const [selectedAdmin, setSelectedAdmin] = useState(null);
   const [isUpdate, setIsUpdate] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [updateData, setUpdateData] = useState({
     _id: "",
@@ -33,12 +35,16 @@ function AdminList() {
 
   const fetchAdmins = async () => {
     try {
+      setLoading(true);
       const token = localStorage.getItem("token");
       const res = await getAdminList(token);
       setAdmins(res.data.admins);
     } catch (error) {
       console.log(error);
       toast.error("Failed to fetch admins");
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -255,51 +261,53 @@ function AdminList() {
       {/* Admin Cards */}
 
       <div className="admin-cards">
-        {admins.map((admin) => (
-          <div className="admin-card" key={admin._id}>
-            {admin.isAdmin && <span className="mainUser">Main Admin</span>}
+        {loading
+          ? [...Array(2)].map((_, index) => <AdminSkeleton key={index} />)
+          : admins.map((admin) => (
+              <div className="admin-card" key={admin._id}>
+                {admin.isAdmin && <span className="mainUser">Main Admin</span>}
 
-            <div className="profile-box">
-              <img
-                src={admin.profileImage || "/default-user.png"}
-                alt={admin.name}
-                className="admin-img"
-              />
-            </div>
+                <div className="profile-box">
+                  <img
+                    src={admin.profileImage || "/default-user.png"}
+                    alt={admin.name}
+                    className="admin-img"
+                  />
+                </div>
 
-            <h5>{admin.name}</h5>
+                <h5>{admin.name}</h5>
 
-            <p>
-              <strong>Email:</strong> {admin.email}
-            </p>
+                <p>
+                  <strong>Email:</strong> {admin.email}
+                </p>
 
-            <p>
-              <strong>Phone:</strong> {admin.phone}
-            </p>
+                <p>
+                  <strong>Phone:</strong> {admin.phone}
+                </p>
 
-            <p>
-              <strong>Location:</strong> {admin.location}
-            </p>
+                <p>
+                  <strong>Location:</strong> {admin.location}
+                </p>
 
-            {isMainAdmin && (
-              <div className="card-actions">
-                <button
-                  className="delete-btn"
-                  onClick={() => confirmDelete(admin._id)}
-                >
-                  Delete
-                </button>
+                {isMainAdmin && (
+                  <div className="card-actions">
+                    <button
+                      className="delete-btn"
+                      onClick={() => confirmDelete(admin._id)}
+                    >
+                      Delete
+                    </button>
 
-                <button
-                  className="update-btn"
-                  onClick={() => openUpdate(admin)}
-                >
-                  Update
-                </button>
+                    <button
+                      className="update-btn"
+                      onClick={() => openUpdate(admin)}
+                    >
+                      Update
+                    </button>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        ))}
+            ))}
       </div>
     </div>
   );

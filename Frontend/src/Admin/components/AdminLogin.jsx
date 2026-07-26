@@ -23,6 +23,7 @@ function AdminLogin() {
 
   const [see, setSee] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
+  const [loading,setLoading]=useState(false);
 
   const [LoginData, setLoginData] = useState({
     email: "",
@@ -75,6 +76,7 @@ function AdminLogin() {
     if (!LoginData.email || !LoginData.password) return;
 
     try {
+      setLoading(true);
       const res = await LoginAdmin(LoginData);
 
       localStorage.setItem("adminToken", res.data.token);
@@ -85,6 +87,9 @@ function AdminLogin() {
     } catch (error) {
       const message = error.response?.data?.message || "Login Failed";
       dispatch(setError(message));
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -107,6 +112,13 @@ function AdminLogin() {
 
         <p className="admin-login-subtitle">Login to manage your dashboard</p>
 
+        <div className="credentials">
+          <span>credentials:</span>
+          <span>
+            <i>admin@gmail.com</i>
+            <i>12345</i>
+          </span>
+        </div>
         <form className="admin-login-form">
           <div className="admin-input-group">
             <input
@@ -148,18 +160,29 @@ function AdminLogin() {
             )}
           </div>
 
-          <button
-            className="admin-login-btn"
-            ref={submitBtn}
-            onClick={handleSubmitLogin}
-          >
-            Sign In
-          </button>
+          {loading ? (
+            <button className="admin-login-btn" disabled>
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Logging in...
+            </button>
+          ) : (
+            <button
+              className="admin-login-btn"
+              ref={submitBtn}
+              onClick={handleSubmitLogin}
+            >
+              Sign In
+            </button>
+          )}
 
           <div className="admin-switch-user">
             <span>Want to visit User Site?</span>
 
-            <button type="button" onClick={switchToUserPage} >
+            <button type="button" onClick={switchToUserPage}>
               User Website
             </button>
           </div>

@@ -171,109 +171,118 @@ const handleShowConfirmPassword=(e)=>{
           />
         </div> */}
 
-       
-          <input type="file" accept="image/*" onChange={setProfile} />
+        <input type="file" accept="image/*" onChange={setProfile} />
+        <input
+          type="text"
+          placeholder="Full Name"
+          name="name"
+          autoComplete="name"
+          onChange={handleChange}
+          ref={(el) => (inputs.current[0] = el)}
+          onKeyDown={(e) => handleKeyDown(e, 0)}
+        />
+        {isSubmit && registerData.name.length == 0 && (
+          <p style={{ color: "red", fontSize: "11px" }}>Fill Name</p>
+        )}
+
+        <input
+          type="email"
+          placeholder="Email"
+          name="email"
+          autoComplete="email"
+          onChange={handleChange}
+          ref={(el) => (inputs.current[1] = el)}
+          onKeyDown={(e) => handleKeyDown(e, 1)}
+        />
+        {isSubmit && registerData.email.length == 0 && (
+          <p style={{ color: "red", fontSize: "11px" }}>Fill Email</p>
+        )}
+
+        <input
+          type="text"
+          placeholder="Mobile Number"
+          name="phone"
+          autoComplete="phone"
+          onChange={handleChange}
+          ref={(el) => (inputs.current[2] = el)}
+          onKeyDown={(e) => handleKeyDown(e, 2)}
+        />
+        {isSubmit && registerData.phone.length == 0 && (
+          <p style={{ color: "red", fontSize: "11px" }}>Fill Phone</p>
+        )}
+
+        <input
+          type="text"
+          placeholder="Location"
+          name="location"
+          autoComplete="location"
+          onChange={handleChange}
+          ref={(el) => (inputs.current[3] = el)}
+          onKeyDown={(e) => handleKeyDown(e, 3)}
+        />
+        {isSubmit && registerData.location.length == 0 && (
+          <p style={{ color: "red", fontSize: "11px" }}>Fill Location</p>
+        )}
+
+        <div className="passwordShow">
           <input
-            type="text"
-            placeholder="Full Name"
-            name="name"
-            autoComplete="name"
+            type={see ? "text" : "password"}
+            placeholder="Password"
+            name="password"
+            autoComplete="new-password"
             onChange={handleChange}
-            ref={(el) => (inputs.current[0] = el)}
-            onKeyDown={(e) => handleKeyDown(e, 0)}
+            ref={(el) => (inputs.current[4] = el)}
+            onKeyDown={(e) => handleKeyDown(e, 4)}
           />
-          {isSubmit && registerData.name.length == 0 && (
-            <p style={{ color: "red", fontSize: "11px" }}>Fill Name</p>
-          )}
+          <button onClick={handleShowPassword}>
+            {see ? (
+              <i className="fa-solid fa-eye"></i>
+            ) : (
+              <i className="fa-solid fa-eye-slash"></i>
+            )}
+          </button>
+        </div>
+        {isSubmit && registerData.password.length == 0 && (
+          <p style={{ color: "red", fontSize: "11px" }}>Fill Password</p>
+        )}
 
+        <div className="passwordShow">
           <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            autoComplete="email"
+            type={seeConfirm ? "text" : "password"}
+            placeholder="Confirm Password"
+            name="confirm_password"
+            autoComplete="new-password"
             onChange={handleChange}
-            ref={(el) => (inputs.current[1] = el)}
-            onKeyDown={(e) => handleKeyDown(e, 1)}
+            ref={(el) => (inputs.current[5] = el)}
+            onKeyDown={(e) => handleKeyDown(e, 5)}
           />
-          {isSubmit && registerData.email.length == 0 && (
-            <p style={{ color: "red", fontSize: "11px" }}>Fill Email</p>
-          )}
-
-          <input
-            type="text"
-            placeholder="Mobile Number"
-            name="phone"
-            autoComplete="phone"
-            onChange={handleChange}
-            ref={(el) => (inputs.current[2] = el)}
-            onKeyDown={(e) => handleKeyDown(e, 2)}
-          />
-          {isSubmit && registerData.phone.length == 0 && (
-            <p style={{ color: "red", fontSize: "11px" }}>Fill Phone</p>
-          )}
-
-          <input
-            type="text"
-            placeholder="Location"
-            name="location"
-            autoComplete="location"
-            onChange={handleChange}
-            ref={(el) => (inputs.current[3] = el)}
-            onKeyDown={(e) => handleKeyDown(e, 3)}
-          />
-          {isSubmit && registerData.location.length == 0 && (
-            <p style={{ color: "red", fontSize: "11px" }}>Fill Location</p>
-          )}
-
-          <div className="passwordShow">
-            <input
-              type={see ? "text" : "password"}
-              placeholder="Password"
-              name="password"
-              autoComplete="new-password"
-              onChange={handleChange}
-              ref={(el) => (inputs.current[4] = el)}
-              onKeyDown={(e) => handleKeyDown(e, 4)}
-            />
-            <button onClick={handleShowPassword}>
-              {see ? (
-                <i className="fa-solid fa-eye"></i>
-              ) : (
-                <i className="fa-solid fa-eye-slash"></i>
-              )}
-            </button>
-          </div>
-          {isSubmit && registerData.password.length == 0 && (
-            <p style={{ color: "red", fontSize: "11px" }}>Fill Password</p>
-          )}
-
-          <div className="passwordShow">
-            <input
-              type={seeConfirm ? "text" : "password"}
-              placeholder="Confirm Password"
-              name="confirm_password"
-              autoComplete="new-password"
-              onChange={handleChange}
-              ref={(el) => (inputs.current[5] = el)}
-              onKeyDown={(e) => handleKeyDown(e, 5)}
-            />
-            <button onClick={handleShowConfirmPassword}>
-              {seeConfirm ? (
-                <i className="fa-solid fa-eye"></i>
-              ) : (
-                <i className="fa-solid fa-eye-slash"></i>
-              )}
-            </button>
-          </div>
-          {isSubmit && registerData.confirm_password.length == 0 && (
-            <p style={{ color: "red", fontSize: "11px" }}>
-              Fill Confirm Password
-            </p>
-          )}
-       
-        <button className="sbt-btn" ref={submitBtn} onClick={handleSubmit}>
-          Register
-        </button>
+          <button onClick={handleShowConfirmPassword}>
+            {seeConfirm ? (
+              <i className="fa-solid fa-eye"></i>
+            ) : (
+              <i className="fa-solid fa-eye-slash"></i>
+            )}
+          </button>
+        </div>
+        {isSubmit && registerData.confirm_password.length == 0 && (
+          <p style={{ color: "red", fontSize: "11px" }}>
+            Fill Confirm Password
+          </p>
+        )}
+        {loading ? (
+          <button className="sbt-btn" disabled>
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Creating Account...
+          </button>
+        ) : (
+          <button className="sbt-btn" ref={submitBtn} onClick={handleSubmit}>
+            Register
+          </button>
+        )}
       </form>
     </div>
   );
