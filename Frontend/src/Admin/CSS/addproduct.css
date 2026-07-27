@@ -88,12 +88,22 @@
     var(--insideBg)
   );
 }
+.AddProduct:disabled{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
 
 .AddProduct:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(236, 72, 153, .35);
 }
 
+.AddProduct:disabled:hover{
+  transform: none;
+  box-shadow: none;
+}
 .button-action a {
   color: #fff;
   background: linear-gradient(35deg, #ff7b7b, #e53935);

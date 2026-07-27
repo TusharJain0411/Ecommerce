@@ -10,6 +10,7 @@ function AddAdmin() {
   const navigate = useNavigate();
 const [showPassword, setShowPassword] = useState(false);
 const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+const [loading,setLoading]=useState(false);
   const [adminData, setAdminData] = useState({
     name: "",
     email: "",
@@ -41,6 +42,7 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     e.preventDefault();
 
     try {
+      setLoading(true);
       const formData = new FormData();
 
       Object.keys(adminData).forEach((key) => {
@@ -59,6 +61,9 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     } catch (error) {
       console.log(error);
       toast.error("Failed to add admin");
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -162,7 +167,19 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
       </div>
 
       <div className="adminBtn  ">
-        <button type="submit">Register Admin</button>
+        {loading ? (
+          <button  type="submit" disabled>
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Adding Admin...
+          </button>
+        ) : (
+          <button type="submit">Register Admin</button>
+        )}
+
         <Link to="/admin/adminlist">Back</Link>
       </div>
     </form>

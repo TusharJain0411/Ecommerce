@@ -179,21 +179,19 @@ function ProductDetails() {
               disabled={!isUpdate}
             />
           </div>
+          {isUpdate ? (
+            <div className="update-detail-btns">
+              <button onClick={handleUpdate}>Update</button>
+              <button onClick={handleCancel}>Cancel</button>
+            </div>
+          ) : (
+            <button className="Back" onClick={handleBack}>
+              Back
+            </button>
+          )}
         </div>
+       
       </div>
-
-      {/* Buttons BELOW the card */}
-
-      {isUpdate ? (
-        <div className="update-detail-btns">
-          <button onClick={handleUpdate}>Update</button>
-          <button onClick={handleCancel}>Cancel</button>
-        </div>
-      ) : (
-        <button className="Back" onClick={handleBack}>
-          Back
-        </button>
-      )}
     </>
   );
 }

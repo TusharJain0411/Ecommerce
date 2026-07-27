@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 function AddProduct() {
     const navigate=useNavigate();
+    const [loading,setLoading]=useState(false);
     const [ProductData,setProductData]=useState({
         img:"",
         title:"",
@@ -34,6 +35,7 @@ function AddProduct() {
    e.preventDefault();
 
    try {
+    setLoading(true);
      const formData = new FormData();
 
      formData.append("img", ProductData.img);
@@ -59,6 +61,9 @@ function AddProduct() {
      navigate("/admin/Products");
    } catch (err) {
      console.log(err);
+   }
+   finally{
+    setLoading(false);
    }
  };
 
@@ -114,9 +119,21 @@ function AddProduct() {
         />
 
         <div className="button-action d-flex justify-content-center align-items-center gap-2 flex-row ">
-          <button onClick={handleSubmitProduct} className="AddProduct">
-            Add Product
-          </button>
+          {loading ? (
+            <button class="AddProduct" disabled>
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Adding Product...
+            </button>
+          ) : (
+            <button onClick={handleSubmitProduct} className="AddProduct">
+              Add Product
+            </button>
+          )}
+
           <Link to="/admin/Products">Back</Link>
         </div>
       </form>
